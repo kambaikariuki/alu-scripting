@@ -1,3 +1,5 @@
 keys.py
 nasa.py
 images.json
+images/
+*.jpg

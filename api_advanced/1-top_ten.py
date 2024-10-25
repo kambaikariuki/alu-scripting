@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""""
+"""
 gets the top ten hot posts in a subreddit
 """
 import requests

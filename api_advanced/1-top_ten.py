@@ -4,17 +4,17 @@ import requests
 
 
 def top_ten(subreddit):
-    """"Doc"""
-    url = "https://www.reddit.com/r/{}/hot.json?limit=10" \
-        .format(subreddit)
+ """ Returns: top ten post titles
+    or None if queried subreddit is invalid """
+ headers = {'User-Agent': 'xica369'}
+ url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+ parameters = {'limit': 10}
+ response = requests.get(url, headers=headers, allow_redirects=False,
+                            params=parameters)
 
-    res = requests.get(url,
-                       headers={
-                           'User-Agent': 'Mozilla/5.0'})
-
-    if res.status_code != 200:
+ if response.status_code == 200:
+        titles_ = response.json().get('data').get('children')
+        for title_ in titles_:
+            print(title_.get('data').get('title'))
+ else:
         print(None)
-    else:
-        json_response = res.json()
-        posts = json_response.get('data').get('children')
-        [print(post.get('data').get('title')) for post in posts]
